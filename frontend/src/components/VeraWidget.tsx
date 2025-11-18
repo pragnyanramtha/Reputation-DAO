@@ -203,16 +203,27 @@ export const VeraWidget: React.FC = () => {
                   {(m.sources?.length || 0) > 0 && (
                     <div className="mt-2 flex flex-wrap gap-1 text-[11px] text-muted-foreground">
                       {m.sources?.slice(0, 3).map((src) => {
-                        // src looks like "/docs/path/to/file.md" or "/docs/file.md#section"
-                        const withoutPrefix = src.replace(/^\/docs\//, "");
-                        const [pathPart, hashPart] = withoutPrefix.split("#");
-                        const pathWithoutMd = pathPart.replace(/\.md$/, "");
-                        const cleanedPath = hashPart
-                          ? `${pathWithoutMd}#${hashPart}`
-                          : pathWithoutMd;
+                        let href = src;
+                        let label = src;
 
-                        const base = DOCS_BASE_URL.replace(/\/$/, "");
-                        const href = `${base}/docs/${cleanedPath}`;
+                        if (src.startsWith("http://") || src.startsWith("https://")) {
+                          // External/absolute URL: keep href as-is, clean label a bit.
+                          label = src
+                            .replace(/^https?:\/\//, "")
+                            .replace(/\.md(?=($|#))/, "");
+                        } else {
+                          // Internal docs path like "/docs/path/file.md" or with a hash.
+                          const withoutPrefix = src.replace(/^\/docs\//, "");
+                          const [pathPart, hashPart] = withoutPrefix.split("#");
+                          const pathWithoutMd = pathPart.replace(/\.md$/, "");
+                          const cleanedPath = hashPart
+                            ? `${pathWithoutMd}#${hashPart}`
+                            : pathWithoutMd;
+
+                          const base = DOCS_BASE_URL.replace(/\/$/, "");
+                          href = `${base}/docs/${cleanedPath}`;
+                          label = cleanedPath;
+                        }
 
                         return (
                           <a
@@ -222,7 +233,7 @@ export const VeraWidget: React.FC = () => {
                             rel="noreferrer"
                             className="rounded-full bg-background/80 px-2 py-0.5 hover:bg-muted"
                           >
-                            {cleanedPath}
+                            {label}
                           </a>
                         );
                       })}
