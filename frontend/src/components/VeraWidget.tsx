@@ -4,6 +4,8 @@ import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import rehypeSanitize from "rehype-sanitize";
 import { MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 // Simple Vera-specific types for the widget
 
@@ -139,26 +141,28 @@ export const VeraWidget: React.FC = () => {
   return (
     <>
       {/* Toggle button */}
-      <button
+      <Button
         type="button"
+        variant="outline"
+        size="icon"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label={isOpen ? "Close Vera chat" : "Open Vera chat"}
-        className="fixed bottom-4 right-4 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-background text-foreground shadow-lg shadow-black/30 transition hover:bg-card"
+        className="fixed bottom-4 right-4 z-40 h-11 w-11 rounded-full border border-border/80 bg-background/95 text-foreground shadow-lg shadow-black/30 hover:bg-card"
       >
-        {isOpen ? "×" : <MessageCircle className="h-4 w-4" />}
-      </button>
+        {isOpen ? <span className="text-lg leading-none">×</span> : <MessageCircle className="h-5 w-5" />}
+      </Button>
 
       {/* Widget panel */}
       {isOpen && (
-        <div className="fixed bottom-20 right-4 z-40 flex w-[360px] max-w-[90vw] flex-col overflow-hidden rounded-2xl border border-glass-border bg-card/95 shadow-2xl backdrop-blur-md">
-          <div className="flex items-center justify-between border-b border-border/80 bg-background/40 px-3 py-2">
+        <div className="fixed bottom-20 right-4 z-40 flex w-[380px] max-w-[90vw] flex-col overflow-hidden rounded-2xl border border-glass-border bg-card/95 shadow-[var(--shadow-card)] backdrop-blur-md">
+          <div className="flex items-center justify-between border-b border-border/80 bg-background/60 px-4 py-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground shadow-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground shadow-md">
                 V
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-semibold text-foreground">Vera</span>
-                <span className="text-[10px] text-muted-foreground">
+                <span className="text-sm font-semibold text-foreground">Vera</span>
+                <span className="text-xs text-muted-foreground">
                   Reputation DAO assistant
                 </span>
               </div>
@@ -167,7 +171,7 @@ export const VeraWidget: React.FC = () => {
 
           <div
             ref={scrollRef}
-            className="flex max-h-[380px] flex-1 flex-col gap-3 overflow-y-auto bg-card px-3 py-3 text-xs"
+            className="flex max-h-[400px] flex-1 flex-col gap-3 overflow-y-auto bg-card px-4 py-3 text-sm"
           >
             {messages.map((m) => (
               <div
@@ -179,8 +183,8 @@ export const VeraWidget: React.FC = () => {
                 <div
                   className={
                     m.role === "user"
-                      ? "max-w-[80%] rounded-2xl rounded-br-md bg-primary px-3 py-2 text-[11px] text-primary-foreground shadow-sm"
-                      : "max-w-[80%] rounded-2xl rounded-bl-md bg-muted px-3 py-2 text-[11px] text-foreground shadow-sm"
+                      ? "max-w-[80%] rounded-2xl rounded-br-md bg-primary px-3 py-2 text-sm text-primary-foreground shadow-sm"
+                      : "max-w-[80%] rounded-2xl rounded-bl-md bg-muted px-3 py-2 text-sm text-foreground shadow-sm"
                   }
                 >
                   {m.role === "assistant" ? (
@@ -197,7 +201,7 @@ export const VeraWidget: React.FC = () => {
                   )}
 
                   {(m.sources?.length || 0) > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-1 text-[9px] text-muted-foreground">
+                    <div className="mt-2 flex flex-wrap gap-1 text-[11px] text-muted-foreground">
                       {m.sources?.slice(0, 3).map((src) => {
                         // src looks like "/docs/path/to/file.md" or "/docs/file.md#section"
                         const withoutPrefix = src.replace(/^\/docs\//, "");
@@ -236,44 +240,47 @@ export const VeraWidget: React.FC = () => {
           </div>
 
           {dynamicSuggestions.length > 0 && (
-            <div className="border-t border-border/80 bg-background/60 px-3 py-2">
-              <div className="flex flex-wrap gap-1">
+            <div className="border-t border-border/80 bg-background/70 px-4 py-2">
+              <div className="flex flex-wrap gap-2">
                 {dynamicSuggestions.slice(0, 3).map((s) => (
-                  <button
+                  <Button
                     key={s}
                     type="button"
                     onClick={() => handleQuickAsk(s)}
-                    className="rounded-full bg-muted px-2 py-1 text-[10px] text-muted-foreground transition hover:bg-primary/10 hover:text-foreground"
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full border-border bg-muted/60 px-3 py-1 text-xs text-muted-foreground transition hover:bg-primary/10 hover:text-foreground"
                   >
                     {s}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>
           )}
 
           <form
-            className="border-t border-border/80 bg-background/80 px-2 py-2"
+            className="border-t border-border/80 bg-background/80 px-3 py-3"
             onSubmit={(e) => {
               e.preventDefault();
               void handleSend();
             }}
           >
             <div className="flex items-center gap-2">
-              <input
+              <Input
                 type="text"
-                className="h-8 flex-1 rounded-lg border border-input bg-background px-2 text-[11px] text-foreground placeholder:text-muted-foreground focus:border-transparent focus:outline-none focus:ring-1 focus:ring-primary"
+                className="h-10 flex-1 text-sm"
                 placeholder="Ask Vera…"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />
-              <button
+              <Button
                 type="submit"
                 disabled={!input.trim() || isSending}
-                className="h-8 rounded-full bg-primary px-3 text-[11px] font-medium text-primary-foreground shadow-sm disabled:cursor-not-allowed disabled:opacity-60"
+                size="sm"
+                className="h-10 rounded-full px-4 text-sm font-medium shadow-sm disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSending ? "..." : "Send"}
-              </button>
+              </Button>
             </div>
           </form>
         </div>
