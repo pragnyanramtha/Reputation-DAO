@@ -22,6 +22,16 @@ interface MarkdownRendererProps {
   filePath: string;
 }
 
+const slugifyHeading = (heading: React.ReactNode): string => {
+  const text = String(heading)
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-');
+
+  return text;
+};
+
 const MarkdownRenderer = ({ filePath }: MarkdownRendererProps) => {
   const [content, setContent] = useState<string>('');
   const [loading, setLoading] = useState(true);
@@ -87,26 +97,54 @@ const MarkdownRenderer = ({ filePath }: MarkdownRendererProps) => {
         rehypePlugins={[rehypeSanitize]}
         components={{
           // Custom heading with anchor links
-          h1: ({ children, ...props }) => (
-            <h1 className="text-4xl font-bold mb-6 mt-8 text-foreground scroll-mt-20" {...props}>
-              {children}
-            </h1>
-          ),
-          h2: ({ children, ...props }) => (
-            <h2 className="text-3xl font-semibold mb-4 mt-8 text-foreground scroll-mt-20 border-b border-border pb-2" {...props}>
-              {children}
-            </h2>
-          ),
-          h3: ({ children, ...props }) => (
-            <h3 className="text-2xl font-semibold mb-3 mt-6 text-foreground scroll-mt-20" {...props}>
-              {children}
-            </h3>
-          ),
-          h4: ({ children, ...props }) => (
-            <h4 className="text-xl font-semibold mb-2 mt-4 text-foreground scroll-mt-20" {...props}>
-              {children}
-            </h4>
-          ),
+          h1: ({ children, ...props }) => {
+            const id = slugifyHeading(children);
+            return (
+              <h1
+                id={id}
+                className="text-4xl font-bold mb-6 mt-8 text-foreground scroll-mt-20"
+                {...props}
+              >
+                {children}
+              </h1>
+            );
+          },
+          h2: ({ children, ...props }) => {
+            const id = slugifyHeading(children);
+            return (
+              <h2
+                id={id}
+                className="text-3xl font-semibold mb-4 mt-8 text-foreground scroll-mt-20 border-b border-border pb-2"
+                {...props}
+              >
+                {children}
+              </h2>
+            );
+          },
+          h3: ({ children, ...props }) => {
+            const id = slugifyHeading(children);
+            return (
+              <h3
+                id={id}
+                className="text-2xl font-semibold mb-3 mt-6 text-foreground scroll-mt-20"
+                {...props}
+              >
+                {children}
+              </h3>
+            );
+          },
+          h4: ({ children, ...props }) => {
+            const id = slugifyHeading(children);
+            return (
+              <h4
+                id={id}
+                className="text-xl font-semibold mb-2 mt-4 text-foreground scroll-mt-20"
+                {...props}
+              >
+                {children}
+              </h4>
+            );
+          },
           
           // Custom paragraph
           p: ({ children, ...props }) => (
