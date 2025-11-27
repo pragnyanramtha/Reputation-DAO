@@ -25,6 +25,8 @@ dist-ssr
 .dfx/
 **/.env
 **/.env.*
+.kiro/
+frontend/.vscode/
 
 # tmp
 tmp/

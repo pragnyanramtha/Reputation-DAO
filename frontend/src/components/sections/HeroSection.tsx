@@ -3,6 +3,8 @@ import { Play, ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import LiquidEther from "../../../@/components/LiquidEther";
+import DecryptedText from "../../../@/components/DecryptedText";
+import ShinyText from "../../../@/components/ShinyText";
 import { GlowingOrb } from "@/components/ui/GlowingOrb";
 
 const HeroSection = () => {
@@ -30,7 +32,7 @@ const HeroSection = () => {
       {/* Liquid Ether Background */}
       <div className="absolute inset-0 z-0 opacity-30">
         <LiquidEther 
-          colors={['#0066FF', '#0080FF', '#00A3FF', '#001F3F']} 
+          colors={['#0066FF', '#0080FF', '#00A3FF', '#001F3F', '#7B2CBF']} 
           mouseForce={25}
           autoIntensity={3}
         />
@@ -60,25 +62,33 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Main Headline with dramatic styling */}
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-5xl sm:text-7xl lg:text-9xl font-bold mb-8 leading-[1.1] tracking-tight relative z-10"
+            className="text-5xl sm:text-7xl lg:text-9xl font-bold mb-8 leading-[1.1] tracking-tight relative z-10 flex flex-col items-center"
           >
-            <span className="block text-white drop-shadow-[0_0_30px_rgba(0,102,255,0.5)]">
-              Reputation
-            </span>
-            <span className="block mt-2 text-blue-400 drop-shadow-[0_0_40px_rgba(0,102,255,0.5)]" style={{
-              background: 'linear-gradient(to right, #60a5fa, #3b82f6)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: '#60a5fa'
-            }}>
-              DAO
-            </span>
-          </motion.h1>
+            <div className="text-white drop-shadow-[0_0_30px_rgba(0,102,255,0.5)]">
+              <DecryptedText 
+                text="Reputation" 
+                speed={100} 
+                maxIterations={20}
+                characters="ABCD1234!?"
+                className="reveal" 
+                parentClassName="all-letters" 
+                encryptedClassName="encrypted"
+                animateOn="view"
+              />
+            </div>
+            <div className="mt-2">
+               <ShinyText 
+                 text="DAO" 
+                 disabled={false} 
+                 speed={3} 
+                 className="text-blue-400 drop-shadow-[0_0_40px_rgba(0,102,255,0.5)]" 
+               />
+            </div>
+          </motion.div>
           
           <motion.p
             initial={{ opacity: 0, y: 20 }}

@@ -1,6 +1,6 @@
 import { Shield, Zap, Network, Lock, Users, TrendingUp } from "lucide-react";
-import { WaveLines } from "@/components/ui/WaveLines";
-import { TiltCard } from "@/components/ui/TiltCard";
+import SpotlightCard from "../../../@/components/SpotlightCard";
+import AnimatedContent from "../../../@/components/AnimatedContent";
 
 const features = [
   {
@@ -28,47 +28,54 @@ const features = [
 
 const FeaturesShowcase = () => {
   return (
-    <section className="relative py-24 md:py-32 overflow-visible bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0a0e1a] dark:via-[#0a0e1a] dark:to-[#0a0e1a]">
-      {/* Wave lines background */}
-      <div className="absolute inset-0 opacity-5 dark:opacity-10">
-        <WaveLines color="#0066FF" lineCount={60} amplitude={80} frequency={0.002} />
-      </div>
-
+    <section className="relative py-24 md:py-32 overflow-hidden bg-[#0a0e1a]">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-500">Product pillars</p>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
-            Radically transforming trust,
-            <span className="block bg-gradient-to-r from-blue-500 to-sky-500 bg-clip-text text-transparent">on-chain.</span>
-          </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            We pared the interface back to clean cards so your team can scan the core ideas quickly—no parallax, no tilt,
-            only the information that matters.
-          </p>
-        </div>
+        <AnimatedContent
+          distance={50}
+          direction="vertical"
+          reverse={false}
+          config={{ tension: 80, friction: 20 }}
+          initialOpacity={0.2}
+          animateOpacity
+          scale={1.1}
+          threshold={0.2}
+        >
+          <div className="text-center mb-16 space-y-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-500">Product pillars</p>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
+              Radically transforming trust,
+              <span className="block bg-gradient-to-r from-blue-500 to-sky-500 bg-clip-text text-transparent">on-chain.</span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              We pared the interface back to clean cards so your team can scan the core ideas quickly—no parallax, no tilt,
+              only the information that matters.
+            </p>
+          </div>
+        </AnimatedContent>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {features.map((feature) => (
-            <TiltCard
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <SpotlightCard
               key={feature.title}
-              className="h-full bg-white/95 dark:bg-card/95 p-8 shadow-lg shadow-slate-200/70 dark:shadow-black/30 border border-border/70"
+              className="h-full bg-white/5 border-white/10 p-8 rounded-3xl"
+              spotlightColor="rgba(59, 130, 246, 0.2)"
             >
-              <div className="flex flex-col h-full text-center gap-6">
-                <div className="mx-auto h-16 w-16 rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-300 grid place-items-center">
-                  <feature.icon className="w-9 h-9" />
+              <div className="flex flex-col h-full text-center gap-6 relative z-10">
+                <div className="mx-auto h-16 w-16 rounded-2xl bg-blue-500/10 text-blue-400 grid place-items-center border border-blue-500/20">
+                  <feature.icon className="w-8 h-8" />
                 </div>
                 <div className="space-y-3">
-                  <h3 className="text-2xl font-semibold text-foreground">{feature.title}</h3>
-                  <p className="text-base text-muted-foreground leading-relaxed">
+                  <h3 className="text-2xl font-semibold text-white">{feature.title}</h3>
+                  <p className="text-base text-gray-400 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-border/60">
-                  <div className="text-3xl font-bold text-blue-500">{feature.metric}</div>
-                  <p className="text-sm text-muted-foreground">{feature.metricLabel}</p>
+                <div className="pt-4 border-t border-white/10 mt-auto">
+                  <div className="text-3xl font-bold text-blue-400">{feature.metric}</div>
+                  <p className="text-sm text-gray-500">{feature.metricLabel}</p>
                 </div>
               </div>
-            </TiltCard>
+            </SpotlightCard>
           ))}
         </div>
 
@@ -80,14 +87,14 @@ const FeaturesShowcase = () => {
           ].map((item) => (
             <div
               key={item.label}
-              className="rounded-2xl border border-border bg-white/95 dark:bg-card/90 p-6 flex items-center gap-4 shadow-sm"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 flex items-center gap-4 shadow-sm hover:bg-white/10 transition-colors"
             >
-              <div className="h-12 w-12 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-300 grid place-items-center">
+              <div className="h-12 w-12 rounded-xl bg-blue-500/10 text-blue-400 grid place-items-center border border-blue-500/20">
                 <item.icon className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">{item.label}</p>
-                <p className="text-xs text-muted-foreground">{item.value}</p>
+                <p className="text-sm font-semibold text-white">{item.label}</p>
+                <p className="text-xs text-gray-400">{item.value}</p>
               </div>
             </div>
           ))}

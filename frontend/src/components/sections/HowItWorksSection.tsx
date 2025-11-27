@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { HexagonBackground } from "@/components/ui/HexagonBackground";
-import { TiltCard } from "@/components/ui/TiltCard";
+import TiltedCard from "../../../@/components/TiltedCard";
 
 const fadeUp: any = {
   hidden: { opacity: 0, y: 28 },
@@ -68,15 +68,15 @@ const stats = [
 
 const HowItWorksSection = () => {
   return (
-    <section className="relative z-10 py-24 md:py-32 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0a0e1a] dark:via-[#0a0e1a] dark:to-[#0a0e1a]">
+    <section className="relative z-10 py-24 md:py-32 overflow-hidden bg-[#0a0e1a]">
       {/* Smooth gradient transition from previous section */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0d1220] via-transparent to-transparent z-0 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0a0e1a] via-transparent to-transparent z-0 pointer-events-none" />
       
       {/* Hexagon background pattern */}
       <HexagonBackground />
       
       {/* Smooth gradient transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#0d1220] z-0 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#0a0e1a] z-0 pointer-events-none" />
 
       <div className="relative mx-auto flex max-w-7xl flex-col gap-16 px-6 py-16 sm:px-10 lg:px-16">
         <motion.div
@@ -118,43 +118,41 @@ const HowItWorksSection = () => {
                   className="group"
                   style={{ perspective: '1000px' }}
                 >
-                  <TiltCard className="h-full rounded-2xl">
-                    <Card className="flex h-full flex-col overflow-hidden rounded-2xl border border-blue-500/20 bg-[#0d1220]/80 shadow-[0_0_40px_rgba(0,102,255,0.1)] hover:shadow-[0_0_60px_rgba(0,102,255,0.2)] hover:border-blue-500/40 transition-all duration-300">
-                      <CardContent className="flex flex-1 flex-col gap-6 p-8 md:flex-row md:items-start md:gap-10">
-                      <div className="flex flex-col items-center gap-4 md:w-48">
-                        <div className="relative">
-                          <div className="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400 border-2 border-blue-500/30 group-hover:scale-110 transition-transform duration-300">
-                            <Icon className="h-8 w-8" />
-                          </div>
-                        </div>
-                        <div className="text-center md:text-left">
-                          <Badge className="mb-2 bg-blue-600 text-white px-4 py-1.5 font-bold shadow-[0_0_20px_rgba(0,102,255,0.3)]">
-                            {step.number}
-                          </Badge>
-                          <p className="text-xl font-bold text-white">
-                            {step.title}
-                          </p>
+                  <Card className="flex h-full flex-col overflow-hidden rounded-2xl border border-blue-500/20 bg-[#0d1220]/80 shadow-[0_0_40px_rgba(0,102,255,0.1)] hover:shadow-[0_0_60px_rgba(0,102,255,0.2)] hover:border-blue-500/40 transition-all duration-300">
+                    <CardContent className="flex flex-1 flex-col gap-6 p-8 md:flex-row md:items-start md:gap-10">
+                    <div className="flex flex-col items-center gap-4 md:w-48">
+                      <div className="relative">
+                        <div className="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400 border-2 border-blue-500/30 group-hover:scale-110 transition-transform duration-300">
+                          <Icon className="h-8 w-8" />
                         </div>
                       </div>
-                      <div className="flex-1 space-y-5">
-                        <p className="text-lg leading-relaxed text-gray-300">
-                          {step.description}
+                      <div className="text-center md:text-left">
+                        <Badge className="mb-2 bg-blue-600 text-white px-4 py-1.5 font-bold shadow-[0_0_20px_rgba(0,102,255,0.3)]">
+                          {step.number}
+                        </Badge>
+                        <p className="text-xl font-bold text-white">
+                          {step.title}
                         </p>
-                        <ul className="space-y-3">
-                          {step.details.map((detail) => (
-                            <li
-                              key={detail}
-                              className="flex items-start gap-3 rounded-2xl bg-blue-500/5 border border-blue-500/20 px-5 py-4 text-sm text-gray-300 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300"
-                            >
-                              <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(0,102,255,0.6)]" />
-                              <span>{detail}</span>
-                            </li>
-                          ))}
-                        </ul>
                       </div>
-                      </CardContent>
-                    </Card>
-                  </TiltCard>
+                    </div>
+                    <div className="flex-1 space-y-5">
+                      <p className="text-lg leading-relaxed text-gray-300">
+                        {step.description}
+                      </p>
+                      <ul className="space-y-3">
+                        {step.details.map((detail) => (
+                          <li
+                            key={detail}
+                            className="flex items-start gap-3 rounded-2xl bg-blue-500/5 border border-blue-500/20 px-5 py-4 text-sm text-gray-300 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300"
+                          >
+                            <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(0,102,255,0.6)]" />
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               );
             })}
@@ -168,94 +166,90 @@ const HowItWorksSection = () => {
             custom={0.2}
             variants={fadeUp}
           >
-            <TiltCard className="flex flex-col group rounded-2xl" glowIntensity={0.2}>
-              <Card className="flex flex-col overflow-hidden rounded-2xl border border-blue-500/20 bg-[#0d1220]/80 shadow-[0_0_40px_rgba(0,102,255,0.1)] hover:shadow-[0_0_60px_rgba(0,102,255,0.2)] hover:border-blue-500/40 transition-all duration-300">
-                <CardContent className="flex flex-col space-y-6 p-8">
-                <Badge className="w-fit px-4 py-2 bg-blue-500/10 border-2 border-blue-500/30 text-blue-400 font-semibold">
-                  Builder tools
-                </Badge>
-                <h3 className="text-3xl font-bold text-white">
-                  Integrate reputation without rethinking your stack
-                </h3>
-                <p className="text-lg leading-relaxed text-gray-300">
-                  Use our SDKs, REST API, or drop-in smart contracts to start
-                  consuming reputation instantly. Opt into advanced orchestration
-                  only when you need it.
+            <Card className="flex flex-col overflow-hidden rounded-2xl border border-blue-500/20 bg-[#0d1220]/80 shadow-[0_0_40px_rgba(0,102,255,0.1)] hover:shadow-[0_0_60px_rgba(0,102,255,0.2)] hover:border-blue-500/40 transition-all duration-300">
+              <CardContent className="flex flex-col space-y-6 p-8">
+              <Badge className="w-fit px-4 py-2 bg-blue-500/10 border-2 border-blue-500/30 text-blue-400 font-semibold">
+                Builder tools
+              </Badge>
+              <h3 className="text-3xl font-bold text-white">
+                Integrate reputation without rethinking your stack
+              </h3>
+              <p className="text-lg leading-relaxed text-gray-300">
+                Use our SDKs, REST API, or drop-in smart contracts to start
+                consuming reputation instantly. Opt into advanced orchestration
+                only when you need it.
+              </p>
+              <div className="rounded-2xl border-2 border-dashed border-blue-500/30 bg-blue-500/5 px-6 py-5 text-sm text-gray-300">
+                <p className="font-bold text-white text-base mb-4">
+                  Popular automations
                 </p>
-                <div className="rounded-2xl border-2 border-dashed border-blue-500/30 bg-blue-500/5 px-6 py-5 text-sm text-gray-300">
-                  <p className="font-bold text-white text-base mb-4">
-                    Popular automations
-                  </p>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(0,102,255,0.6)]" />
-                      <span>Merit-weighted voting and proposals</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(0,102,255,0.6)]" />
-                      <span>Token rewards tied to verified milestones</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(0,102,255,0.6)]" />
-                      <span>Invite flows gated by proven expertise</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="flex flex-wrap gap-4">
-                  <Link to="/auth">
-                    <Button size="lg" className="px-8 py-6 text-base font-semibold rounded-2xl bg-blue-600 hover:bg-blue-700 text-white shadow-[0_0_40px_rgba(0,102,255,0.3)] hover:shadow-[0_0_60px_rgba(0,102,255,0.5)]">
-                      Start building
-                    </Button>
-                  </Link>
-                  <a
-                    href="https://docs.google.com/document/d/1e03vreMKph3KPX-g8-jlbIAlD8D3PvA8VXPbZNIrT-0/edit?tab=t.0"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex"
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(0,102,255,0.6)]" />
+                    <span>Merit-weighted voting and proposals</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(0,102,255,0.6)]" />
+                    <span>Token rewards tied to verified milestones</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(0,102,255,0.6)]" />
+                    <span>Invite flows gated by proven expertise</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/auth">
+                  <Button size="lg" className="px-8 py-6 text-base font-semibold rounded-2xl bg-blue-600 hover:bg-blue-700 text-white shadow-[0_0_40px_rgba(0,102,255,0.3)] hover:shadow-[0_0_60px_rgba(0,102,255,0.5)]">
+                    Start building
+                  </Button>
+                </Link>
+                <a
+                  href="https://docs.google.com/document/d/1e03vreMKph3KPX-g8-jlbIAlD8D3PvA8VXPbZNIrT-0/edit?tab=t.0"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex"
+                >
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-blue-500/30 text-blue-400 hover:bg-blue-500/10 px-8 py-6 text-base font-semibold rounded-2xl"
                   >
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="border-2 border-blue-500/30 text-blue-400 hover:bg-blue-500/10 px-8 py-6 text-base font-semibold rounded-2xl"
-                    >
-                      Browse docs
-                    </Button>
-                  </a>
-                </div>
-                </CardContent>
-              </Card>
-            </TiltCard>
+                    Browse docs
+                  </Button>
+                </a>
+              </div>
+              </CardContent>
+            </Card>
 
-            <TiltCard className="group rounded-2xl" glowIntensity={0}>
-              <Card className="rounded-2xl border border-blue-500/20 bg-[#0d1220]/80 shadow-[0_0_40px_rgba(0,102,255,0.1)] hover:shadow-[0_0_60px_rgba(0,102,255,0.2)] hover:border-blue-500/40 transition-all duration-300">
-                <CardContent className="flex flex-col gap-6 p-8">
-                <p className="text-sm font-bold uppercase tracking-wide text-blue-400">
-                  Built for production
-                </p>
-                <div className="grid gap-5 sm:grid-cols-2">
-                  {stats.map((stat) => {
-                    const Icon = stat.icon;
-                    return (
-                      <div
-                        key={stat.title}
-                        className="flex items-start gap-4 rounded-2xl bg-blue-500/5 border border-blue-500/20 px-5 py-4 text-sm text-gray-300 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300"
-                      >
-                        <span className="mt-1 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/30">
-                          <Icon className="h-5 w-5" />
-                        </span>
-                        <div>
-                          <p className="font-bold text-white text-base mb-1">
-                            {stat.title}
-                          </p>
-                          <p className="leading-relaxed">{stat.description}</p>
-                        </div>
+            <Card className="rounded-2xl border border-blue-500/20 bg-[#0d1220]/80 shadow-[0_0_40px_rgba(0,102,255,0.1)] hover:shadow-[0_0_60px_rgba(0,102,255,0.2)] hover:border-blue-500/40 transition-all duration-300">
+              <CardContent className="flex flex-col gap-6 p-8">
+              <p className="text-sm font-bold uppercase tracking-wide text-blue-400">
+                Built for production
+              </p>
+              <div className="grid gap-5 sm:grid-cols-2">
+                {stats.map((stat) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div
+                      key={stat.title}
+                      className="flex items-start gap-4 rounded-2xl bg-blue-500/5 border border-blue-500/20 px-5 py-4 text-sm text-gray-300 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300"
+                    >
+                      <span className="mt-1 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/30">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <p className="font-bold text-white text-base mb-1">
+                          {stat.title}
+                        </p>
+                        <p className="leading-relaxed text-gray-400">{stat.description}</p>
                       </div>
-                    );
-                  })}
-                </div>
-                </CardContent>
-              </Card>
-            </TiltCard>
+                    </div>
+                  );
+                })}
+              </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </div>
