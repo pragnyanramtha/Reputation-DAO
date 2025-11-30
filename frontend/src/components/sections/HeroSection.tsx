@@ -67,7 +67,7 @@ const HeroSection = () => {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-5xl sm:text-7xl lg:text-9xl font-bold mb-8 leading-[1.1] tracking-tight relative z-10 flex flex-col items-center"
           >
-            <div className="text-white drop-shadow-[0_0_30px_rgba(0,102,255,0.5)]">
+            <div className="text-slate-900 dark:text-white drop-shadow-[0_0_30px_rgba(0,102,255,0.5)]">
               Reputation
             </div>
             <div className="mt-2">
