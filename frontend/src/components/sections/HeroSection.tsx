@@ -3,7 +3,6 @@ import { Play, ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import LiquidEther from "../../../@/components/LiquidEther";
-import DecryptedText from "../../../@/components/DecryptedText";
 import ShinyText from "../../../@/components/ShinyText";
 import { GlowingOrb } from "@/components/ui/GlowingOrb";
 
@@ -69,16 +68,7 @@ const HeroSection = () => {
             className="text-5xl sm:text-7xl lg:text-9xl font-bold mb-8 leading-[1.1] tracking-tight relative z-10 flex flex-col items-center"
           >
             <div className="text-white drop-shadow-[0_0_30px_rgba(0,102,255,0.5)]">
-              <DecryptedText 
-                text="Reputation" 
-                speed={100} 
-                maxIterations={20}
-                characters="ABCD1234!?"
-                className="reveal" 
-                parentClassName="all-letters" 
-                encryptedClassName="encrypted"
-                animateOn="view"
-              />
+              Reputation
             </div>
             <div className="mt-2">
                <ShinyText 
