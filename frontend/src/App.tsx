@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { TooltipProvider } from "@/components/ui/core";
 import { Toaster, SonnerToaster } from "@/components/ui/composed";
+import { VeraWidget } from "@/components/VeraWidget";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -108,6 +109,7 @@ const App = () => (
                         <Route path="*" element={<NotFoundPage />} />
                       </Routes>
                     </Suspense>
+                    <VeraWidget />
                   </TooltipProvider>
                 </RoleProvider>
               </RouteProvider>
